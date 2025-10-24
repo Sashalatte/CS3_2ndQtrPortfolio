@@ -1,106 +1,171 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<style>
+    <link rel="icon" href="favicon.png.png">
+    <link rel="stylesheet" href="2Q2GRubidiumCueto.css">
+    <title>Rb sched</title>
+    <style>
+        p {
+            text-align: center;
+            font-size: 18px;
+            color: rgb(0, 0, 0);
+            max-width: 800px;
+            margin: 20px auto;
+            line-height: 1.6;
+            background-color: rgb(109, 3, 148);
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
 
-body {
-    font-family: "Trebuchet MS", sans-serif;
-    background-color: #0b0b0b;
-    color: #e0d7f5;
-    margin: 0;
-}
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
 
-header {
-    background-color: #29004a;
-    color: #e7c6ff;
-    padding: 1px;
-    text-align: center;
-}
+        .content{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 20px;
+        }
+        .text {
+        flex: 1 1 300px;
+        max-width: 400px;
+        }
 
-nav {
-    background-color: #7a00cc;
-    padding: 10px;
-    text-align: center;
-}
+        .text p {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 20px;
+        margin-bottom: 10px;
+        text-align: justify;
+        }
 
-nav a {
-    color: #f2e6ff;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 8px 15px;
-}
+        .media {
+        flex: 1 1 400px;
+        text-align: center;
+        }
 
-nav a:hover {
-    background-color: #e7c6ff;
-    color: #29004a;
-    border-radius: 5px;
-}
+        .media iframe, .media img {
+        width: 100%;
+        max-width: 480px;
+        border-radius: 10px;
+        }
 
-table {
-    width: 50%;
-    margin: 20px auto;
-    border-collapse: collapse;
-    background-color: #1a001f;
-}
+        th,
+        td {
+            border: 1px solid rgb(167, 7, 182);
+            padding: 15px;
+            text-align: left;
+        }
 
-th,
-td {
-    border: 1px solid #b366ff;
-    padding: 8px;
-    text-align: center;
-    color: #f2e6ff;
-}
+        th {
+            text-align: center;
+        }
 
-th {
-    background-color: #7a00cc;
-    color: #ffffff;
-}
-
-footer {
-    background-color: #29004a;
-    color: #f2e6ff;
-    text-align: center;
-    padding: 15px;
-    margin-top: 40px;
-}
-
-footer a {
-    color: #cba6f7;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
-</style>
+        img,
+        iframe {
+            margin-top: 20px;
+        }
+    </style>
 </head>
+
 <body>
+    <header> 
+        <h1>Rubidium'29 Schedule</h1>
+        <h2>Thursday Schedule</h2>
+    </header>
 
-  
-  
-  <h1>Rubidium '29 Schedule</h1>
-  <h2>Tuesday</h2>
+    <nav> 
+        <a href="https://andymorana.github.io/CS3_1stQtrPortfolio/public/MondaySched.html" target="_blank"
+        style="color: rgb(177, 6, 234)">Monday Schedule</a>
+        <a href="https://sashalatte.github.io/CS3_2ndQtrPortfolio/public/2Q2GRubidiumChua.html" target="_blank"
+        style="color: rgb(177, 7, 234)">Tuesday Schedule</a>
+        <a href="https://banonok11.github.io/CS3_2ndQtrPortfolio_RubidiumOcampo/public/2Q2GRubidiumOcampo.html" target="_blank"
+        style="color: rgb(177, 6, 234)">Friday Schedule</a>
+    </nav>
+    
+    <div class="content"> 
+        <div class="text">
+            <p> This image is Reyna from one of my most favorite games, Valorant.
+                I picked her because she is one of my most favorite characters in the game not just because of her playstyle but because of her character design.
+                I decided to make my website pure valorant so I picked the video because I love the animations and it is my
+                favorite video animation out of them all. </p>
+        </div>
+    
+        <div class="media">
+            <img src="https://images.wallpapersden.com/image/download/reyna-new-art-valorant_bGhmZm6UmZqaraWkpJRmZ21lrWZlbWU.jpg">
+            <iframe src="https://www.youtube.com/embed/PlpqhZiumDM"></iframe>
+        </div>
+    </div>
 
-  <table>
-    <tr>
-      <th>Time</th><th>Subject</th>
-    </tr>
-    <tr><td>7:20-8:15</td><td>English</td></tr>
-    <tr><td>8:15-9:00</td><td>Health</td></tr>
-    <tr><td>9:00-9:10</td><td style="background-color: rgb(72, 0, 80);"></td></tr>
-    <tr><td>9:10-9:55</td><td rowspan="2">Physics</td></tr>
-    <tr><td>9:55-10:40</td>
-    <tr><td>10:40-11:25</td><td>Study Period</td></tr>
-    <tr><td>11:25-12:10</td><td>Social Science</td></tr>
-    <tr><td>12:10-12:20</td><td style="background-color: rgb(80, 0, 65);"></td></tr>
-    <tr><td>12:20-1:05</td><td>Lunch</td></tr>
-    <tr><td>1:05-1:50</td><td>Math</td></tr>
-    <tr><td>1:50-2:35</td><td>Study Period</td></tr>
-    <tr><td>2:35-2:45</td><td style="background-color: rgb(80, 0, 76);"></td></tr>
-    <tr><td>2:45-3:30</td><td rowspan="2">Computer Science</td></tr>
-    <tr><td>3:30-4:15</td>
-  </table>
-
-
-</body>
+    <table style="background-color:rgb(0, 0, 0)">
+        <tr style="color:rgb(167, 7, 182)">
+            <th>Time</th>
+            <th>Subject</th>
+        </tr>
+        <tr style="color:rgb(167, 7, 182)">
+            <td>7:20-8:15</td>
+            <td>Statistics</td>
+        </tr>
+        <tr style="color:rgb(255, 255, 255)">
+            <td>8:15-9:00</td>
+            <td>Study Period</td>
+        </tr>
+        <tr style="color:rgb(255, 255, 255)">
+            <td>9:00-9:10</td>
+            <td></td>
+        </tr>
+        <tr style="color:rgb(167, 7, 182)">
+            <td>9:10-9:55</td>
+            <td>Biology</td>
+        </tr>
+        <tr style="color:rgb(167, 7, 182)">
+            <td>9:55-10:40</td>
+            <td>Biology</td>
+        </tr>
+        <tr style="color:rgb(167, 7, 182)">
+            <td>10:40-11:25</td>
+            <td>Filipino</td>
+        </tr>
+        <tr style="color:rgb(167, 7, 182)">
+            <td>11:25-12:10</td>
+            <td>Values Education</td>
+        </tr>
+        <tr style="color:rgb(255, 255, 255)">
+            <td>12:10-12:20</td>
+            <td></td>
+        </tr>
+        <tr style="color:rgb(255, 255, 255)">
+            <td>12:20-1:05</td>
+            <td>Lunch</td>
+        </tr>
+        <tr style="color:rgb(167, 7, 182)">
+            <td>1:05-1:50</td>
+            <td>Chemistry</td>
+        </tr>
+        <tr style="color:rgb(255, 255, 255)">
+            <td>1:50-2:35</td>
+            <td>Study Period</td>
+        </tr>
+        <tr style="color:rgb(255, 255, 255)">
+            <td>2:35-2:45</td>
+            <td></td>
+        </tr>
+        <tr style="color:rgb(167, 7, 182)">
+            <td>2:45-3:30</td>
+            <td>Physical Education</td>
+        </tr>
+        <tr style="color:rgb(167, 7, 182)">
+            <td>3:30-4:15</td>
+            <td>Physical Education</td>
+        </tr>
+    </table>
 </html>
