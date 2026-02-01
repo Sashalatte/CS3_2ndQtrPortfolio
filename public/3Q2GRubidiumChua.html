@@ -77,11 +77,6 @@
     </label>
 
     <label>
-      Birthday
-      <input type="date" id="birthday" required>
-    </label>
-
-    <label>
       Email Address
       <input type="email" id="email" required onblur="checkEmpty(this)">
     </label>
@@ -126,11 +121,11 @@
       Preferred Organization / Club
       <select id="club" required>
         <option value="">Select</option>
-        <option value="it">CS Club</option>
-        <option value="sci">Science Club</option>
-        <option value="art">Art Club</option>
-        <option value="math">Math Club</option>
-        <option value="music">Music Club</option>
+        <option value="CS">CS Club</option>
+        <option value="Science">Science Club</option>
+        <option value="Art">Art Club</option>
+        <option value="Math">Math Club</option>
+        <option value="Music">Music Club</option>
       </select>
     </label>
 
@@ -144,64 +139,49 @@
   <button type="reset">Reset</button>
   <button type="button" onclick="saveData()">Save</button>
   <button type="button" onclick="clearData()">Clear</button>
+  <button type="button" onclick="viewSignUps()">View Signups</button>
 
 </form>
 
 <script>
-function checkEmpty(el) {
+function checkEmpty(el){
   if (!el.value.trim()) el.classList.add("error");
   else el.classList.remove("error");
 }
 
-/* wont go to different page */
-function submitForm(event) {
-  event.preventDefault(); 
-  if (!confirm("Do you want to submit this application?")) return false;
-  saveData();
-  alert("Thank you for submitting your application!");
+function submitForm(event){
+  event.preventDefault();
+  if (!confirm("do you want to submit this application?")) return false;
+
+  const signup = {
+    studentId: studentId.value,
+    name: name.value,
+    email: email.value,
+    phone: phone.value,
+    grade: grade.value,
+    club: club.value,
+    reason: reason.value,
+    role: document.querySelector('input[name="role"]:checked').value
+  };
+
+  let list = JSON.parse(localStorage.getItem("signups"));
+  if (!list) list = [];
+  list.push(signup);
+  localStorage.setItem("signups", JSON.stringify(list));
+  alert("Application submitted!")
   return false;
 }
 
-/* save data */
-function saveData() {
-  localStorage.setItem("studentId", studentId.value);
-  localStorage.setItem("name", name.value);
-  localStorage.setItem("birthday", birthday.value);
-  localStorage.setItem("email", email.value);
-  localStorage.setItem("phone", phone.value);
-  localStorage.setItem("grade", grade.value);
-  localStorage.setItem("club", club.value);
-  localStorage.setItem("reason", reason.value);
+function loadData() {}
 
-  const role = document.querySelector('input[name="role"]:checked');
-  if (role) localStorage.setItem("role", role.value);
-}
-
-/* load data */
-function loadData() {
-  studentId.value = localStorage.getItem("studentId") || "";
-  name.value = localStorage.getItem("name") || "";
-  birthday.value = localStorage.getItem("birthday") || "";
-  email.value = localStorage.getItem("email") || "";
-  phone.value = localStorage.getItem("phone") || "";
-  grade.value = localStorage.getItem("grade") || "";
-  club.value = localStorage.getItem("club") || "";
-  reason.value = localStorage.getItem("reason") || "";
-
-  const role = localStorage.getItem("role");
-  if (role) {
-    document.querySelector(`input[name="role"][value="${role}"]`).checked = true;
-  }
-}
-
-/* clear */
 function clearData() {
-  localStorage.clear();
-  document.querySelectorAll("input, select, textarea").forEach(el => {
-    el.value = "";
-    if (el.type === "radio") el.checked = false;
-  });
+  document.querySelector("form").reset();
 }
+
+function viewSignUps() {
+  window.location.href = "viewSignUps.html";
+}
+
 </script>
 
 </body>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>View Signups</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+h2 {
+  color: #5e0b0b;
+}
+
+#filter {
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+#total {
+  float: right;
+  font-weight: bold;
+  margin-top: -40px;
+  margin-right: 10%;
+}
+
+table {
+  width: 90%;
+  margin: 20px auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+thead {
+  background-color: #5e0b0b;
+  color: white;
+  font-weight: bold;
+}
+
+thead th {
+  padding: 12px;
+  text-align: left;
+}
+
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #cccccc;
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+</style>
+</head>
+<body onload="loadTable()">
+
+<h2>Student Signups</h2>
+
+<div style="display: flex; justify-content: space-between; width: 90%; margin: auto; align-items: center;">
+  <div>
+    Select Your Club:
+    <select id="filter" onchange="loadTable()">
+      <option value="All">ALL</option>
+      <option value="CS">CS Club</option>
+      <option value="Science">Science Club</option>
+      <option value="Art">Art Club</option>
+      <option value="Math">Math Club</option>
+      <option value="Music">Music Club</option>
+    </select>
+  </div>
+  <div id="total">Total Signups: 0</div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Club</th>
+      <th>ID</th>
+      <th>Full Name</th>
+      <th>Grade</th>
+      <th>Email</th>
+      <th>Mobile</th>
+      <th>Intern / Extern</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody">
+    
+  </tbody>
+</table>
+
+<br>
+<a href="3Q2GRubidiumChua.html"><button>Back to Signup Form</button></a>
+
+<script>
+function loadTable() {
+  const data = JSON.parse(localStorage.getItem("signups")) || [];
+  const filter = document.getElementById("filter").value;
+  const tbody = document.getElementById("tableBody");
+  tbody.innerHTML = "";
+
+  let filtered = data;
+  if (filter !== "all") {
+    filtered = data.filter(s => s.club === filter);
+  }
+
+  document.getElementById("total").textContent = "Total Signups: " + filtered.length;
+
+  if (filtered.length === 0) {
+    const row = document.createElement("tr");
+    row.innerHTML = `<td colspan="7" style="text-align:center; padding:15px;">No sign-ups for this club.</td>`;
+    tbody.appendChild(row);
+    return;
+  }
+
+  filtered.forEach(s => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${s.club}</td>
+      <td>${s.studentId}</td>
+      <td>${s.name}</td>
+      <td>${s.grade}</td>
+      <td>${s.email}</td>
+      <td>${s.phone}</td>
+      <td>${s.role}</td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+</script>
+
+</body>
+</html>
