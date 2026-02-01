@@ -59,9 +59,9 @@
 </style>
 </head>
 
-<body onload="loadData()">
+<body>
 
-<form method="post" onsubmit="return submitForm(event);" onreset="return confirm('Do you want to reset the form?');">
+<form method="post" id="signupForm">
 
   <fieldset>
     <legend>Personal Information</legend>
@@ -98,8 +98,8 @@
         <option value="g8">Grade 8</option>
         <option value="g9">Grade 9</option>
         <option value="g10">Grade 10</option>
-        <option value="g10">Grade 11</option>
-        <option value="g10">Grade 12</option>
+        <option value="g11">Grade 11</option>
+        <option value="g12">Grade 12</option>
       </select>
     </label>
 
@@ -107,12 +107,10 @@
       Intern / Extern
       <div class="radio-group">
         <label class="radio-option">
-          <input type="radio" name="role" value="intern" required>
-          Intern
+          <input type="radio" name="role" value="intern" required> Intern
         </label>
         <label class="radio-option">
-          <input type="radio" name="role" value="extern">
-          Extern
+          <input type="radio" name="role" value="extern"> Extern
         </label>
       </div>
     </label>
@@ -136,10 +134,8 @@
   </fieldset>
 
   <button type="submit">Submit</button>
-  <button type="reset">Reset</button>
-  <button type="button" onclick="saveData()">Save</button>
-  <button type="button" onclick="clearData()">Clear</button>
-  <button type="button" onclick="viewSignUps()">View Signups</button>
+  <button type="reset" onclick="return confirm('Do you want to reset the form?')">Reset</button>
+  <button type="button" onclick="viewSignUps()">Check Signups</button>
 
 </form>
 
@@ -149,39 +145,29 @@ function checkEmpty(el){
   else el.classList.remove("error");
 }
 
-function submitForm(event){
-  event.preventDefault();
-  if (!confirm("do you want to submit this application?")) return false;
-
+document.getElementById("signupForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  if (!confirm("Do you want to submit this application?")) return;
   const signup = {
-    studentId: studentId.value,
-    name: name.value,
-    email: email.value,
-    phone: phone.value,
-    grade: grade.value,
-    club: club.value,
-    reason: reason.value,
+    studentId: document.getElementById("studentId").value,
+    name: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+    phone: document.getElementById("phone").value,
+    grade: document.getElementById("grade").value,
+    club: document.getElementById("club").value,
+    reason: document.getElementById("reason").value,
     role: document.querySelector('input[name="role"]:checked').value
   };
-
-  let list = JSON.parse(localStorage.getItem("signups"));
-  if (!list) list = [];
+  let list = JSON.parse(localStorage.getItem("signups")) || [];
   list.push(signup);
   localStorage.setItem("signups", JSON.stringify(list));
-  alert("Application submitted!")
-  return false;
-}
+  alert("Application submitted!");
+  this.reset();
+});
 
-function loadData() {}
-
-function clearData() {
-  document.querySelector("form").reset();
-}
-
-function viewSignUps() {
+function viewSignUps(){
   window.location.href = "viewSignUps.html";
 }
-
 </script>
 
 </body>
