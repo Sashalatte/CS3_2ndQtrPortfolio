@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Q4 2nd Graded - Rb CHUA</title>
+<link rel="icon" href="./assets/favicon-2.png">
+<style>
+
+body{
+font-family:Arial;
+background:#381f1f;
+color:white;
+text-align:center;
+padding:40px;
+}
+
+.container{
+background:#4f2f2f;
+padding:25px;
+border-radius:12px;
+width:420px;
+margin:auto;
+}
+
+input,select{
+padding:8px;
+border-radius:6px;
+border:none;
+margin:6px;
+}
+
+button{
+padding:10px 18px;
+border:none;
+border-radius:8px;
+background:#ffd24d;
+font-weight:bold;
+cursor:pointer;
+transition:transform 0.15s, background 0.15s;
+}
+
+button:hover{
+transform:scale(1.08);
+background:#ffe680;
+}
+
+.star{
+font-size:32px;
+cursor:pointer;
+color:gray;
+display:inline-block;
+transition:transform 0.15s;
+}
+
+.star:hover{
+transform:scale(1.25) rotate(-6deg);
+}
+
+.yellow{
+color:gold !important;
+}
+
+ul{
+list-style:none;
+padding:0;
+}
+
+li{
+background:#633d3d;
+padding:10px;
+margin:10px;
+border-radius:8px;
+}
+
+.deleteBtn{
+margin-left:10px;
+background:#ff5c5c;
+color:white;
+transition:transform 0.15s;
+}
+
+.deleteBtn:hover{
+transform:scale(1.08);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Movie Rating</h2>
+
+<form onsubmit="addMovie(); return false;">
+
+<input type="text" id="title" placeholder="Movie Title" required>
+<br>
+
+<select id="genre">
+<option>Action</option>
+<option>Adventure</option>
+<option>Animation</option>
+<option>Comedy</option>
+<option>Documentary</option>
+<option>Drama</option>
+<option>Fantasy</option>
+<option>Horror</option>
+<option>Romantic Comedy</option>
+<option>Science Fiction</option>
+<option>Thriller</option>
+</select>
+
+<br><br>
+
+<div>
+<span class="star" onclick="setRating(1)">★</span>
+<span class="star" onclick="setRating(2)">★</span>
+<span class="star" onclick="setRating(3)">★</span>
+<span class="star" onclick="setRating(4)">★</span>
+<span class="star" onclick="setRating(5)">★</span>
+</div>
+
+<br>
+
+<button type="submit">Add Movie</button>
+
+</form>
+<hr>
+<h3>Movie List</h3>
+<ul id="movieList"></ul>
+</div>
+<script>
+
+let rating = 0
+function setRating(num){
+rating = num
+let stars = document.querySelectorAll(".star")
+stars.forEach(function(s,i){
+if(i < num){
+s.classList.add("yellow")
+}else{
+s.classList.remove("yellow")
+}
+})
+}
+
+function getMovies(){
+let movies = localStorage.getItem("movies")
+
+if(movies){
+return JSON.parse(movies)
+}else{
+return []
+}
+}
+
+function saveMovies(movies){
+localStorage.setItem("movies", JSON.stringify(movies))
+}
+
+function addMovie(){
+
+let title = document.getElementById("title").value
+let genre = document.getElementById("genre").value
+let movies = getMovies()
+let existing = movies.find(function(m){
+return m.title === title
+})
+
+if(existing){
+existing.rating = (existing.rating + rating) / 2
+}else{
+let movie = {
+title: title,
+genre: genre,
+rating: rating
+}
+movies.push(movie)
+}
+
+saveMovies(movies)
+displayMovies()
+
+}
+
+function displayMovies(){
+
+let movies = getMovies()
+let list = document.getElementById("movieList")
+list.innerHTML = ""
+movies.forEach(function(movie,index){
+let li = document.createElement("li")
+let text = document.createElement("span")
+let starText = "★".repeat(Math.round(movie.rating))
+text.textContent = movie.title + " (" + movie.genre + ") " + starText
+let delBtn = document.createElement("button")
+
+delBtn.textContent = "Delete"
+delBtn.className = "deleteBtn"
+delBtn.type = "button"
+
+
+delBtn.onclick = function(){
+deleteMovie(index)
+}
+
+li.appendChild(text)
+li.appendChild(delBtn)
+
+list.appendChild(li)
+
+})
+
+}
+
+function deleteMovie(index){
+
+if(confirm("Delete this movie?")){
+let movies = getMovies()
+movies.splice(index,1)
+saveMovies(movies)
+displayMovies()
+}}
+displayMovies()
+
+</script>
+
+</body>
+</html>
